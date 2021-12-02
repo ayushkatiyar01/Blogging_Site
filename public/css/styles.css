@@ -33,3 +33,9 @@
 	font-size: 12px;
   color: #fff;
 }
+.fixedbutton {
+    position: fixed;
+    bottom: 125px;
+    right: 125px; 
+    
+}
