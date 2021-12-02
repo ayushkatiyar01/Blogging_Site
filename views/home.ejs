@@ -1,11 +1,20 @@
 <%- include ("partials/header"); -%>
-<h1>Home</h1>
-<p><%= homeContent %></p>
 
 <% posts.forEach(element=> {%>
    <h1> <%= element.PostTitle %></h1>
-   <p><%= element.PostBody %></p>
+   <p>
+      <%= element.PostBody.substring(0,100) %>
+      <% if(element.PostBody.length>100) { %> 
+      <a href="/posts/<%= element.PostTitle %>">... Read More</a>
+      <%}%>
+   </p>
 <%}); %>
 
+      <form action="/home" method="post">
+         <button type="submit" class="fixedbutton btn ">
+            write blog..
+         </button>
+      </form>
+  
 
 <%- include ("partials/footer"); -%>
