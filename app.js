@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
+const { response } = require("express");
 
 
 const app = express();
@@ -17,8 +18,18 @@ const contactContent = "Scelerisque eleifend donec pretium vulputate sapien. Rho
 
 
 app.get("/", function (request, response) {
-    response.render("home", { text: homeStartingContent });
+    response.render("home", { homeContent: homeStartingContent });
 })
+
+app.get("/about", function (request, response) {
+    response.render("about", { aboutContent: aboutContent });
+});
+
+app.get("/contact", function (request, response) {
+    response.render("contact", { contactContent: contactContent });
+});
+
+
 
 app.listen(process.env.PORT || 3000, function (request, response) {
     console.log("Server started at port 3000 .")
