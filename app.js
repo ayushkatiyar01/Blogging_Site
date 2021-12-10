@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 // connection with database 
-mongoose.connect("mongodb+srv://admin-ayush:9569kevinBossAyush1614@cluster0.ztydm.mongodb.net/blogDB", { useNewUrlParser: true });
+mongoose.connect("mongodb+srv://<user-name>:<password>@cluster0.ztydm.mongodb.net/blogDB", { useNewUrlParser: true });
 
 //making structure for blog
 const blogSchema = {
