@@ -5,7 +5,7 @@
    <p>
       <%= element.content.substring(0,100) %>
       <% if(element.content.length>100) { %> 
-      <a href="/posts/<%= element.PostTitle %>">... Read More</a>
+      <a href="/posts/<%= element.id %>">... Read More</a>
       <%}%>
    </p>
 <%}); %>

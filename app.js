@@ -18,26 +18,12 @@ const blogSchema = {
 }
 
 const blogPost = mongoose.model('blogPost', blogSchema);
-// let posts = [];
 
-const it1 = new blogPost({
-    title: 'Day 1',
-    content: "Hello worl my name is ayush"
-})
-const it2 = new blogPost({
-    title: 'Day 1',
-    content: "Hello worl my name is ayush"
-})
-const it3 = new blogPost({
-    title: 'Day 1',
-    content: "Hello worl my name is ayush"
-})
-
+// displays all the posts on the home page
 app.get("/", function (request, response) {
-    blogPost.find({},function(err,posts){
-        console.log(posts)
+    blogPost.find({}, function (err, posts) {
         response.render("home", { posts: posts });
-    })
+    });
 });
 
 app.get("/about", function (request, response) {
@@ -53,49 +39,25 @@ app.get("/compose", function (request, response) {
 });
 
 app.get("/posts/:PostId", function (req, res) {
-    let requestTitle = lodash.lowerCase(req.params.PostId);
-    // console.log(requestTitle);
-    const requestPostId = request.params.PostId ; 
 
-    // posts.forEach(element => {
-    //     let storedtitle = lodash.lowerCase(element.PostTitle);
+    const requestPostId = req.params.PostId;
 
-    //     if (storedtitle === requestTitle) {
-    //         res.render("post", {
-    //             title: element.PostTitle,
-    //             content: element.PostBody,
-    //         });
-    //     }
-    // });
-
-    blogPost.findOne({_id: requestPostId},function(err,post){
-        res.render("post" ,{
-            title:post.title , 
-            content:post.content
+    blogPost.findOne({ _id: requestPostId }, function (err, post) {
+        res.render("post", {
+            id: requestPostId , 
+            title: post.title,
+            content: post.content
         });
     });
 });
 
 app.post("/compose", function (request, response) {
-    console.log(request.body.PostTitle);
-    
-    // console.log(request.body.PostBody);
 
     const item = new blogPost({
         title: request.body.PostTitle,
         content: request.body.PostBody
     });
     item.save();
-
-    // let content = {
-    //     PostTitle: request.body.PostTitle,
-    //     PostBody: request.body.PostBody,
-    // }
-    // posts.push(content);
-
-
-    // console.log(posts);
-
     response.redirect("/");
 });
 
