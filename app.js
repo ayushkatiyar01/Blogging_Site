@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
-const lodash = require('lodash');          // this package to required to compare the url names 
+const lodash = require('lodash');        
 const mongoose = require('mongoose');
 const res = require("express/lib/response");
 
@@ -10,13 +10,16 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+// connection with database 
 mongoose.connect("mongodb://localhost:27017/blogDB", { useNewUrlParser: true });
 
+//making structure for blog
 const blogSchema = {
     title: String,
     content: String
 }
 
+// making collections 
 const blogPost = mongoose.model('blogPost', blogSchema);
 
 // displays all the posts on the home page
@@ -26,18 +29,22 @@ app.get("/", function (request, response) {
     });
 });
 
+// about page route 
 app.get("/about", function (request, response) {
     response.render("about");
 });
 
+//contact page route 
 app.get("/contact", function (request, response) {
     response.render("contact");
 });
 
+//compose page route 
 app.get("/compose", function (request, response) {
     response.render("compose");
 });
 
+// for unique post , content having length greater than 100 . 
 app.get("/posts/:PostId", function (req, res) {
 
     const requestPostId = req.params.PostId;
@@ -51,6 +58,7 @@ app.get("/posts/:PostId", function (req, res) {
     });
 });
 
+//updates the database
 app.post("/compose", function (request, response) {
 
     const item = new blogPost({
@@ -61,6 +69,7 @@ app.post("/compose", function (request, response) {
     response.redirect("/");
 });
 
+//for home page   
 app.post("/home", function (request, response) {
     response.redirect("/compose");
 });
