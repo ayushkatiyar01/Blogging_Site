@@ -76,5 +76,5 @@ app.post("/home", function (request, response) {
 
 // listens on port 3000 or any other port 
 app.listen(process.env.PORT || 3000, function (request, response) {
-    console.log("Server started at port 3000 .")
+    console.log("Server started successfully .")
 });
