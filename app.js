@@ -10,8 +10,11 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+
+DSN = process.env.DSN
+
 // connection with database 
-mongoose.connect("mongodb+srv://admin-ayush:mark2AyushKevinBossSingh1614@cluster0.ztydm.mongodb.net/blogDB", { useNewUrlParser: true });
+mongoose.connect(`mongodb+srv://${DSN}`, { useNewUrlParser: true });
 
 //making structure for blog
 const blogSchema = {
